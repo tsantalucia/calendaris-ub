@@ -431,6 +431,7 @@ const I18N = {
     fullscreen: "Full screen",
     exitFullscreen: "Exit full screen",
     months: {9:"September",10:"October",11:"November",12:"December"},
+    roomLabel: "Room",
     typeLabel: {classe:"Class", avaluacio:"Exam", festiu:"Holiday"},
     dow: ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
     titles: {
@@ -465,6 +466,7 @@ const I18N = {
     fullscreen: "Pantalla completa",
     exitFullscreen: "Sortir de pantalla completa",
     months: {9:"Setembre",10:"Octubre",11:"Novembre",12:"Desembre"},
+    roomLabel: "Aula",
     typeLabel: {classe:"Classe", avaluacio:"Examen", festiu:"Festiu"},
     dow: ["diumenge","dilluns","dimarts","dimecres","dijous","divendres","dissabte"],
     titles: {
@@ -499,6 +501,7 @@ const I18N = {
     fullscreen: "Pantalla completa",
     exitFullscreen: "Salir de pantalla completa",
     months: {9:"Septiembre",10:"Octubre",11:"Noviembre",12:"Diciembre"},
+    roomLabel: "Aula",
     typeLabel: {classe:"Clase", avaluacio:"Examen", festiu:"Festivo"},
     dow: ["domingo","lunes","martes","miércoles","jueves","viernes","sábado"],
     titles: {
@@ -541,18 +544,18 @@ function classify(obs){
 // events[group] = array of {d,m,type,title,start,end}
 const EVENTS = {
 T4: [
- {d:8,m:9,obs:"Welcome+intro genomics I",start:'19:00',end:'20:30'},
- {d:15,m:9,obs:"Intro Genom II+Techniques I",start:'19:00',end:'20:30'},
- {d:22,m:9,obs:"Techniques seq II",start:'19:00',end:'20:30'},
- {d:29,m:9,obs:"Genomic Diag",start:'19:00',end:'20:30'},
- {d:6,m:10,obs:"PGX",start:'19:00',end:'20:30'},
+ {d:8,m:9,obs:"Welcome+intro genomics I",start:'19:00',end:'20:30',room:'061'},
+ {d:15,m:9,obs:"Intro Genom II+Techniques I",start:'19:00',end:'20:30',room:'061'},
+ {d:22,m:9,obs:"Techniques seq II",start:'19:00',end:'20:30',room:'061'},
+ {d:29,m:9,obs:"Genomic Diag",start:'19:00',end:'20:30',room:'061'},
+ {d:6,m:10,obs:"PGX",start:'19:00',end:'20:30',room:'061'},
  {d:13,m:10,obs:"PGX Practical",start:'19:00',end:'20:30'},
  {d:20,m:10,obs:"Exam 1",start:'19:00',end:'20:30'},
- {d:27,m:10,obs:"Cancer IT-I",start:'19:00',end:'20:30'},
- {d:3,m:11,obs:"Cancer IT-II",start:'19:00',end:'20:30'},
- {d:10,m:11,obs:"microbiota",start:'19:00',end:'20:30'},
- {d:17,m:11,obs:"Bacteriophages",start:'19:00',end:'20:30'},
- {d:24,m:11,obs:"CRISPR",start:'19:00',end:'20:30'},
+ {d:27,m:10,obs:"Cancer IT-I",start:'19:00',end:'20:30',room:'061'},
+ {d:3,m:11,obs:"Cancer IT-II",start:'19:00',end:'20:30',room:'061'},
+ {d:10,m:11,obs:"microbiota",start:'19:00',end:'20:30',room:'061'},
+ {d:17,m:11,obs:"Bacteriophages",start:'19:00',end:'20:30',room:'061'},
+ {d:24,m:11,obs:"CRISPR",start:'19:00',end:'20:30',room:'061'},
  {d:1,m:12,obs:"Exam 2",start:'19:00',end:'20:30'},
  {d:8,m:12,obs:"Festiu (Immaculada)",start:'19:00',end:'20:30'},
 ],
@@ -679,6 +682,7 @@ function render(){
       <div class="s-body">
         <span class="s-tag">${t.typeLabel[ev.type]}</span>
         <div class="s-title">${title}</div>
+        ${ev.room ? `<div class="s-sub">${t.roomLabel} ${ev.room}</div>` : ''}
       </div>
       ${isFestiu ? '' : `<div class="s-time">${ev.start}–${ev.end}</div>`}
     `;

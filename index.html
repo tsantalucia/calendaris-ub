@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Genomics and Personalized Medicine — Calendar 26-27</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#12242b;
+    --paper:#e8f1f8;
+    --panel:#ffffff;
+    --line:#c9dced;
+    --teal:#1d5b57;
+    --teal-deep:#123c39;
+    --amber:#c47a2c;
+    --rose:#a4433c;
+    --grey:#7a8a94;
+    --muted:#4d6478;
+    --grp-t4:#1d5b57;
+    --grp-e4:#3d6b9c;
+    --grp-a4:#c47a2c;
+    --grp-c4:#a4433c;
+    --radius:14px;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Inter',system-ui,sans-serif;
+    -webkit-font-smoothing:antialiased;
+    min-height:100vh;
+  }
+  .wrap{max-width:920px;margin:0 auto;padding:28px 20px 60px;}
+
+  /* Header */
+  header{margin-bottom:26px;}
+  .eyebrow{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11.5px;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    color:var(--teal);
+    display:flex;
+    align-items:center;
+    gap:8px;
+    margin-bottom:10px;
+  }
+  .eyebrow::before{
+    content:"";
+    width:7px;height:7px;border-radius:50%;
+    background:var(--teal);
+    display:inline-block;
+  }
+  h1{
+    font-family:'Fraunces',serif;
+    font-optical-sizing:auto;
+    font-weight:600;
+    font-size:clamp(28px,5vw,40px);
+    line-height:1.08;
+    margin:0 0 8px;
+    letter-spacing:-.01em;
+  }
+  .subtitle{
+    color:var(--muted);
+    font-size:15px;
+    max-width:52ch;
+    line-height:1.5;
+  }
+
+  /* Group selector */
+  .group-select{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin:22px 0 4px;
+  }
+  .group-btn{
+    font-family:'Inter',sans-serif;
+    font-weight:600;
+    font-size:13.5px;
+    padding:9px 16px;
+    border-radius:100px;
+    border:1.5px solid var(--line);
+    background:var(--panel);
+    color:var(--ink);
+    cursor:pointer;
+    transition:all .15s ease;
+    display:flex;
+    align-items:center;
+    gap:7px;
+  }
+  .group-btn .dot{width:8px;height:8px;border-radius:50%;background:var(--muted);flex:none;}
+  .group-btn:hover{border-color:var(--ink);}
+  .group-btn.active{
+    background:var(--ink);
+    border-color:var(--ink);
+    color:#fff;
+  }
+  .group-btn.active .dot{background:currentColor;}
+  .group-btn[data-grp="T4"].active{background:var(--grp-t4);border-color:var(--grp-t4);}
+  .group-btn[data-grp="E4"].active{background:var(--grp-e4);border-color:var(--grp-e4);}
+  .group-btn[data-grp="A4"].active{background:var(--grp-a4);border-color:var(--grp-a4);}
+  .group-btn[data-grp="C4"].active{background:var(--grp-c4);border-color:var(--grp-c4);}
+  .group-btn[data-grp="T4"] .dot{background:var(--grp-t4);}
+  .group-btn[data-grp="E4"] .dot{background:var(--grp-e4);}
+  .group-btn[data-grp="A4"] .dot{background:var(--grp-a4);}
+  .group-btn[data-grp="C4"] .dot{background:var(--grp-c4);}
+
+  .schedule-line{
+    font-size:13px;
+    color:var(--muted);
+    line-height:1.6;
+    margin:14px 0 26px;
+    padding:10px 14px;
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:10px;
+  }
+  .schedule-line strong{color:var(--ink);}
+
+  /* Month tabs */
+  .month-tabs{
+    display:flex;
+    gap:4px;
+    border-bottom:1.5px solid var(--line);
+    margin-bottom:24px;
+    overflow-x:auto;
+  }
+  .month-tab{
+    font-family:'Inter',sans-serif;
+    font-weight:600;
+    font-size:14px;
+    color:var(--muted);
+    background:none;
+    border:none;
+    padding:10px 16px 12px;
+    cursor:pointer;
+    position:relative;
+    white-space:nowrap;
+  }
+  .month-tab.active{color:var(--ink);}
+  .month-tab.active::after{
+    content:"";
+    position:absolute;
+    bottom:-1.5px;left:16px;right:16px;
+    height:2.5px;
+    background:var(--ink);
+    border-radius:2px;
+  }
+  .month-tab .count{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:10.5px;
+    color:var(--muted);
+    margin-left:4px;
+  }
+
+  /* Timeline */
+  .timeline{position:relative;padding-left:26px;}
+  .timeline::before{
+    content:"";
+    position:absolute;
+    left:6px;top:6px;bottom:6px;
+    width:1.5px;
+    background:var(--line);
+  }
+  .week-group{margin-bottom:28px;}
+  .week-label{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11px;
+    color:var(--muted);
+    letter-spacing:.04em;
+    margin-bottom:10px;
+    position:relative;
+  }
+  .week-label::before{
+    content:"";
+    position:absolute;
+    left:-26px;top:3px;
+    width:11px;height:11px;
+    border-radius:50%;
+    background:var(--paper);
+    border:2px solid var(--ink);
+  }
+
+  .session-card{
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:16px 18px;
+    margin-bottom:10px;
+    display:flex;
+    gap:14px;
+    align-items:flex-start;
+    transition:transform .12s ease, box-shadow .12s ease;
+  }
+  .session-card:hover{
+    transform:translateY(-1px);
+    box-shadow:0 4px 16px rgba(18,36,43,.07);
+  }
+  .session-card.type-tutoria{border-left:3px solid var(--amber);}
+  .session-card.type-avaluacio{border-left:3px solid var(--rose);}
+  .session-card.type-classe{border-left:3px solid var(--teal);}
+  .session-card.type-festiu{
+    border-left:3px solid var(--grey);
+    background:transparent;
+    box-shadow:none;
+    opacity:.72;
+  }
+  .session-card.type-festiu:hover{transform:none;box-shadow:none;}
+
+  .s-date{
+    flex:none;
+    width:76px;
+    text-align:center;
+  }
+  .s-date .d{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    font-size:22px;
+    line-height:1;
+    color:var(--ink);
+  }
+  .s-date .dow{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:10px;
+    text-transform:uppercase;
+    color:var(--muted);
+    letter-spacing:.03em;
+    margin-top:3px;
+    line-height:1.25;
+  }
+
+  .s-body{flex:1;min-width:0;}
+  .s-tag{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:10px;
+    text-transform:uppercase;
+    letter-spacing:.06em;
+    font-weight:500;
+    margin-bottom:5px;
+    display:inline-block;
+  }
+  .type-classe .s-tag{color:var(--teal);}
+  .type-tutoria .s-tag{color:var(--amber);}
+  .type-avaluacio .s-tag{color:var(--rose);}
+  .type-festiu .s-tag{color:var(--grey);}
+
+  .s-title{
+    font-weight:600;
+    font-size:15px;
+    line-height:1.35;
+    margin-bottom:3px;
+  }
+  .s-sub{
+    font-size:13px;
+    color:var(--muted);
+    line-height:1.4;
+  }
+  .s-time{
+    flex:none;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12.5px;
+    color:var(--ink);
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:7px;
+    padding:5px 9px;
+    white-space:nowrap;
+    align-self:center;
+  }
+  .s-note{
+    margin-top:6px;
+    font-size:12px;
+    color:var(--amber);
+    font-weight:500;
+  }
+
+  footer{
+    margin-top:40px;
+    padding-top:18px;
+    border-top:1px solid var(--line);
+    font-size:12.5px;
+    color:var(--muted);
+    display:flex;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:8px;
+  }
+
+  @media (max-width:520px){
+    .wrap{padding:20px 14px 40px;}
+    .session-card{flex-wrap:wrap;}
+    .s-time{order:3;}
+  }
+
+  .lang-select{
+    display:flex;
+    align-items:center;
+    justify-content:flex-end;
+    gap:10px;
+    margin-bottom:16px;
+  }
+  .lang-toggle{
+    display:flex;
+    gap:2px;
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:100px;
+    padding:3px;
+  }
+  .lang-btn{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11px;
+    font-weight:500;
+    letter-spacing:.03em;
+    padding:6px 12px;
+    border-radius:100px;
+    border:none;
+    background:none;
+    color:var(--muted);
+    cursor:pointer;
+    transition:all .15s ease;
+  }
+  .lang-btn.active{
+    background:var(--ink);
+    color:#fff;
+  }
+  .fullscreen-btn{
+    display:flex;
+    align-items:center;
+    gap:6px;
+    font-family:'Inter',sans-serif;
+    font-size:12px;
+    font-weight:600;
+    color:var(--ink);
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:100px;
+    padding:8px 14px;
+    cursor:pointer;
+    transition:all .15s ease;
+    text-decoration:none;
+  }
+  .fullscreen-btn:hover{border-color:var(--ink);}
+  .fullscreen-btn svg{width:13px;height:13px;flex:none;}
+  header{}
+  @media (max-width:640px){
+    .lang-select{justify-content:flex-start;flex-wrap:wrap;}
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .session-card{transition:none;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="lang-select" id="langSelect">
+      <button class="fullscreen-btn" id="fullscreenBtn" type="button">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3M21 8V5a2 2 0 0 0-2-2h-3M3 16v3a2 2 0 0 0 2 2h3M16 21h3a2 2 0 0 0 2-2v-3"/></svg>
+        <span id="txt-fullscreen"></span>
+      </button>
+      <div class="lang-toggle">
+        <button class="lang-btn active" data-lang="en">EN</button>
+        <button class="lang-btn" data-lang="ca">CAT</button>
+        <button class="lang-btn" data-lang="es">ESP</button>
+      </div>
+    </div>
+    <div class="eyebrow" id="txt-eyebrow"></div>
+    <h1 id="txt-title"></h1>
+    <div class="subtitle" id="txt-subtitle"></div>
+  </header>
+
+  <div class="group-select" id="groupSelect">
+    <button class="group-btn active" data-grp="T4"><span class="dot"></span><span id="lbl-T4">Group T4</span></button>
+    <button class="group-btn" data-grp="E4"><span class="dot"></span><span id="lbl-E4">Group E4</span></button>
+    <button class="group-btn" data-grp="A4"><span class="dot"></span><span id="lbl-A4">A4/B4/M4</span></button>
+    <button class="group-btn" data-grp="C4"><span class="dot"></span><span id="lbl-C4">C4/D4</span></button>
+  </div>
+
+  <div class="schedule-line" id="scheduleLine"></div>
+
+  <div class="month-tabs" id="monthTabs"></div>
+
+  <div class="timeline" id="timeline"></div>
+
+  <footer>
+    <span id="txt-footer"></span>
+  </footer>
+
+</div>
+
+<script>
+/* ---------- DADES ---------- */
+// Font: Genomics and Personalized Medicine — Programació de sessions 2026/27
+const SCHEDULES = {
+  T4: { en:"Tuesday · 19:00–20:30", ca:"Dimarts · 19:00–20:30", es:"Martes · 19:00–20:30" },
+  E4: { en:"Thursday · 11:30–13:00", ca:"Dijous · 11:30–13:00", es:"Jueves · 11:30–13:00" },
+  A4: { en:"Friday · 11:30–13:00", ca:"Divendres · 11:30–13:00", es:"Viernes · 11:30–13:00" },
+  C4: { en:"Friday · 16:00–17:30", ca:"Divendres · 16:00–17:30", es:"Viernes · 16:00–17:30" },
+};
+
+const GROUP_META = {
+  T4: { en:"Group T4 · Campus Clínic · afternoon", ca:"Grup T4 · Campus Clínic · tarda", es:"Grupo T4 · Campus Clínic · tarde" },
+  E4: { en:"Group E4 · Campus Clínic · morning", ca:"Grup E4 · Campus Clínic · matí", es:"Grupo E4 · Campus Clínic · mañana" },
+  A4: { en:"Groups A4/B4/M4 · Campus Bellvitge · morning", ca:"Grups A4/B4/M4 · Campus Bellvitge · matí", es:"Grupos A4/B4/M4 · Campus Bellvitge · mañana" },
+  C4: { en:"Groups C4/D4 · Campus Bellvitge · afternoon", ca:"Grups C4/D4 · Campus Bellvitge · tarda", es:"Grupos C4/D4 · Campus Bellvitge · tarde" },
+};
+
+const GROUP_SHORT = {
+  T4: "T4",
+  E4: "E4",
+  A4: "A4/B4/M4",
+  C4: "C4/D4",
+};
+
+const I18N = {
+  en: {
+    eyebrow: "Academic Year 2026 – 2027 · Faculty of Nursing UB",
+    title: "Calendar — Genomics and Personalized Medicine",
+    subtitle: "4th year elective course. Check the sessions and exams for your group.",
+    schedule: (grpLabel, sched) => `<strong>${grpLabel}</strong> · usual weekly session: <strong>${sched}</strong>`,
+    noSessions: (grp) => `No sessions this month for group ${grp}.`,
+    footer: "Genomics and Personalized Medicine · Faculty of Nursing, Universitat de Barcelona",
+    fullscreen: "Full screen",
+    exitFullscreen: "Exit full screen",
+    months: {9:"September",10:"October",11:"November",12:"December"},
+    roomLabel: "Room",
+    examLocationNote: "Exam at the computer room (TBC) + class continues afterwards in Room 211",
+    typeLabel: {classe:"Class", avaluacio:"Exam", festiu:"Holiday"},
+    dow: ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
+    titles: {
+      "Welcome+intro genomics I":"Welcome to the course + What is genomics? (I)",
+      "Intro Genom II+Techniques I":"What is genomics? (II) + Techniques for studying the genome (I)",
+      "Techniques seq II":"Techniques for studying the genome (II)",
+      "Genomic Diag":"Genomic diagnostics",
+      "PGX":"Pharmacogenomics (PGx)",
+      "PGX Practical":"PGx practical session",
+      "Exam 1":"Exam 1",
+      "Cancer IT-I":"Cancer immunotherapy (I)",
+      "Cancer IT-II":"Cancer immunotherapy (II)",
+      "Cancer IT":"Cancer immunotherapy (II)",
+      "Exam 1/Cancer IT":"Exam 1 / Cancer immunotherapy (I)",
+      "microbiota":"The human microbiota",
+      "Bacteriophages":"Bacteriophage therapy of infections",
+      "CRISPR":"Editing genomes with CRISPR/Cas9",
+      "Exam 2":"Exam 2",
+      "Festiu (Diada)":"Public holiday (Diada Nacional)",
+      "Festiu (La Mercè)":"Public holiday (La Mercè)",
+      "Festiu (Immaculada)":"Public holiday (Immaculada Concepció)",
+      "Dia no lectiu":"Non-teaching day",
+    },
+  },
+  ca: {
+    eyebrow: "Curs 2026 – 2027 · Facultat d'Infermeria UB",
+    title: "Calendari — Genomics and Personalized Medicine",
+    subtitle: "Assignatura optativa de quart curs. Consulta les sessions i exàmens del teu grup.",
+    schedule: (grpLabel, sched) => `<strong>${grpLabel}</strong> · sessió setmanal habitual: <strong>${sched}</strong>`,
+    noSessions: (grp) => `Cap sessió aquest mes per al grup ${grp}.`,
+    footer: "Genomics and Personalized Medicine · Facultat d'Infermeria, Universitat de Barcelona",
+    fullscreen: "Pantalla completa",
+    exitFullscreen: "Sortir de pantalla completa",
+    months: {9:"Setembre",10:"Octubre",11:"Novembre",12:"Desembre"},
+    roomLabel: "Aula",
+    examLocationNote: "Examen a l'aula d'informàtica (per confirmar) + continuació de classe a l'Aula 211",
+    typeLabel: {classe:"Classe", avaluacio:"Examen", festiu:"Festiu"},
+    dow: ["diumenge","dilluns","dimarts","dimecres","dijous","divendres","dissabte"],
+    titles: {
+      "Welcome+intro genomics I":"Benvinguda al curs + Què és la genòmica? (I)",
+      "Intro Genom II+Techniques I":"Què és la genòmica? (II) + Tècniques per a l'estudi del genoma (I)",
+      "Techniques seq II":"Tècniques per a l'estudi del genoma (II)",
+      "Genomic Diag":"Diagnòstic genòmic",
+      "PGX":"Farmacogenòmica (PGx)",
+      "PGX Practical":"Sessió pràctica de farmacogenòmica (PGx)",
+      "Exam 1":"Examen 1",
+      "Cancer IT-I":"Immunoteràpia del càncer (I)",
+      "Cancer IT-II":"Immunoteràpia del càncer (II)",
+      "Cancer IT":"Immunoteràpia del càncer (II)",
+      "Exam 1/Cancer IT":"Examen 1 / Immunoteràpia del càncer (I)",
+      "microbiota":"La microbiota humana",
+      "Bacteriophages":"Teràpia amb bacteriòfags d'infeccions",
+      "CRISPR":"Edició de genomes amb CRISPR/Cas9",
+      "Exam 2":"Examen 2",
+      "Festiu (Diada)":"Festiu (Diada Nacional)",
+      "Festiu (La Mercè)":"Festiu (La Mercè)",
+      "Festiu (Immaculada)":"Festiu (Immaculada Concepció)",
+      "Dia no lectiu":"Dia no lectiu",
+    },
+  },
+  es: {
+    eyebrow: "Curso 2026 – 2027 · Facultad de Enfermería UB",
+    title: "Calendario — Genomics and Personalized Medicine",
+    subtitle: "Asignatura optativa de cuarto curso. Consulta las sesiones y exámenes de tu grupo.",
+    schedule: (grpLabel, sched) => `<strong>${grpLabel}</strong> · sesión semanal habitual: <strong>${sched}</strong>`,
+    noSessions: (grp) => `Ninguna sesión este mes para el grupo ${grp}.`,
+    footer: "Genomics and Personalized Medicine · Facultad de Enfermería, Universitat de Barcelona",
+    fullscreen: "Pantalla completa",
+    exitFullscreen: "Salir de pantalla completa",
+    months: {9:"Septiembre",10:"Octubre",11:"Noviembre",12:"Diciembre"},
+    roomLabel: "Aula",
+    examLocationNote: "Examen en el aula de informática (por confirmar) + continuación de clase en el Aula 211",
+    typeLabel: {classe:"Clase", avaluacio:"Examen", festiu:"Festivo"},
+    dow: ["domingo","lunes","martes","miércoles","jueves","viernes","sábado"],
+    titles: {
+      "Welcome+intro genomics I":"Bienvenida al curso + ¿Qué es la genómica? (I)",
+      "Intro Genom II+Techniques I":"¿Qué es la genómica? (II) + Técnicas para el estudio del genoma (I)",
+      "Techniques seq II":"Técnicas para el estudio del genoma (II)",
+      "Genomic Diag":"Diagnóstico genómico",
+      "PGX":"Farmacogenómica (PGx)",
+      "PGX Practical":"Sesión práctica de farmacogenómica (PGx)",
+      "Exam 1":"Examen 1",
+      "Cancer IT-I":"Inmunoterapia del cáncer (I)",
+      "Cancer IT-II":"Inmunoterapia del cáncer (II)",
+      "Cancer IT":"Inmunoterapia del cáncer (II)",
+      "Exam 1/Cancer IT":"Examen 1 / Inmunoterapia del cáncer (I)",
+      "microbiota":"La microbiota humana",
+      "Bacteriophages":"Terapia con bacteriófagos de infecciones",
+      "CRISPR":"Edición de genomas con CRISPR/Cas9",
+      "Exam 2":"Examen 2",
+      "Festiu (Diada)":"Festivo (Diada Nacional)",
+      "Festiu (La Mercè)":"Festivo (La Mercè)",
+      "Festiu (Immaculada)":"Festivo (Immaculada Concepción)",
+      "Dia no lectiu":"Día no lectivo",
+    },
+  }
+};
+
+let currentLang = "en";
+
+function dowLabel(d,m,y){
+  const dt = new Date(y,m-1,d);
+  return I18N[currentLang].dow[dt.getDay()];
+}
+
+function classify(obs){
+  if(/^Exam/i.test(obs)) return 'avaluacio';
+  if(/^Festiu|Dia no lectiu/i.test(obs)) return 'festiu';
+  return 'classe';
+}
+
+// events[group] = array of {d,m,type,title,start,end}
+const EVENTS = {
+T4: [
+ {d:8,m:9,obs:"Welcome+intro genomics I",start:'19:00',end:'20:30',room:'061'},
+ {d:15,m:9,obs:"Intro Genom II+Techniques I",start:'19:00',end:'20:30',room:'061'},
+ {d:22,m:9,obs:"Techniques seq II",start:'19:00',end:'20:30',room:'061'},
+ {d:29,m:9,obs:"Genomic Diag",start:'19:00',end:'20:30',room:'061'},
+ {d:6,m:10,obs:"PGX",start:'19:00',end:'20:30',room:'061'},
+ {d:13,m:10,obs:"PGX Practical",start:'19:00',end:'20:30'},
+ {d:20,m:10,obs:"Exam 1",start:'19:00',end:'20:30'},
+ {d:27,m:10,obs:"Cancer IT-I",start:'19:00',end:'20:30',room:'061'},
+ {d:3,m:11,obs:"Cancer IT-II",start:'19:00',end:'20:30',room:'061'},
+ {d:10,m:11,obs:"microbiota",start:'19:00',end:'20:30',room:'061'},
+ {d:17,m:11,obs:"Bacteriophages",start:'19:00',end:'20:30',room:'061'},
+ {d:24,m:11,obs:"CRISPR",start:'19:00',end:'20:30',room:'061'},
+ {d:1,m:12,obs:"Exam 2",start:'19:00',end:'20:30'},
+ {d:8,m:12,obs:"Festiu (Immaculada)",start:'19:00',end:'20:30'},
+],
+E4: [
+ {d:10,m:9,obs:"Welcome+intro genomics I",start:'11:30',end:'13:00',room:'4'},
+ {d:17,m:9,obs:"Intro Genom II+Techniques I",start:'11:30',end:'13:00',room:'4'},
+ {d:24,m:9,obs:"Festiu (La Mercè)",start:'11:30',end:'13:00'},
+ {d:1,m:10,obs:"Techniques seq II",start:'11:30',end:'13:00',room:'4'},
+ {d:8,m:10,obs:"Genomic Diag",start:'11:30',end:'13:00',room:'4'},
+ {d:15,m:10,obs:"PGX",start:'11:30',end:'13:00',room:'4'},
+ {d:22,m:10,obs:"PGX Practical",start:'11:30',end:'13:00'},
+ {d:29,m:10,obs:"Exam 1",start:'11:30',end:'13:00'},
+ {d:5,m:11,obs:"Cancer IT-I",start:'11:30',end:'13:00',room:'4'},
+ {d:12,m:11,obs:"Cancer IT-II",start:'11:30',end:'13:00',room:'4'},
+ {d:19,m:11,obs:"microbiota",start:'11:30',end:'13:00',room:'4'},
+ {d:26,m:11,obs:"Bacteriophages",start:'11:30',end:'13:00',room:'4'},
+ {d:3,m:12,obs:"CRISPR",start:'11:30',end:'13:00',room:'4'},
+ {d:10,m:12,obs:"Exam 2",start:'11:30',end:'13:00'},
+],
+A4: [
+ {d:11,m:9,obs:"Festiu (Diada)",start:'11:30',end:'13:00'},
+ {d:18,m:9,obs:"Welcome+intro genomics I",start:'11:30',end:'13:00',room:'211'},
+ {d:25,m:9,obs:"Dia no lectiu",start:'11:30',end:'13:00'},
+ {d:2,m:10,obs:"Intro Genom II+Techniques I",start:'11:30',end:'13:00',room:'211'},
+ {d:9,m:10,obs:"Techniques seq II",start:'11:30',end:'13:00',room:'211'},
+ {d:16,m:10,obs:"Genomic Diag",start:'11:30',end:'13:00',room:'211'},
+ {d:23,m:10,obs:"PGX",start:'11:30',end:'13:00',room:'211'},
+ {d:30,m:10,obs:"PGX Practical",start:'11:30',end:'13:00'},
+ {d:6,m:11,obs:"Exam 1/Cancer IT",start:'11:30',end:'13:00'},
+ {d:13,m:11,obs:"Cancer IT",start:'11:30',end:'13:00',room:'211'},
+ {d:20,m:11,obs:"microbiota",start:'11:30',end:'13:00',room:'211'},
+ {d:27,m:11,obs:"Bacteriophages",start:'11:30',end:'13:00',room:'211'},
+ {d:4,m:12,obs:"CRISPR",start:'11:30',end:'13:00',room:'211'},
+ {d:11,m:12,obs:"Exam 2",start:'11:30',end:'13:00'},
+],
+C4: [
+ {d:11,m:9,obs:"Festiu (Diada)",start:'16:00',end:'17:30'},
+ {d:18,m:9,obs:"Welcome+intro genomics I",start:'16:00',end:'17:30',room:'211'},
+ {d:25,m:9,obs:"Dia no lectiu",start:'16:00',end:'17:30'},
+ {d:2,m:10,obs:"Intro Genom II+Techniques I",start:'16:00',end:'17:30',room:'211'},
+ {d:9,m:10,obs:"Techniques seq II",start:'16:00',end:'17:30',room:'211'},
+ {d:16,m:10,obs:"Genomic Diag",start:'16:00',end:'17:30',room:'211'},
+ {d:23,m:10,obs:"PGX",start:'16:00',end:'17:30',room:'211'},
+ {d:30,m:10,obs:"PGX Practical",start:'16:00',end:'17:30'},
+ {d:6,m:11,obs:"Exam 1/Cancer IT",start:'16:00',end:'17:30'},
+ {d:13,m:11,obs:"Cancer IT",start:'16:00',end:'17:30',room:'211'},
+ {d:20,m:11,obs:"microbiota",start:'16:00',end:'17:30',room:'211'},
+ {d:27,m:11,obs:"Bacteriophages",start:'16:00',end:'17:30',room:'211'},
+ {d:4,m:12,obs:"CRISPR",start:'16:00',end:'17:30',room:'211'},
+ {d:11,m:12,obs:"Exam 2",start:'16:00',end:'17:30'},
+],
+};
+
+// assign type to each event based on its observation text
+Object.keys(EVENTS).forEach(g=>{
+  EVENTS[g].forEach(ev=>{ ev.type = classify(ev.obs); });
+});
+
+const MONTH_KEYS = [9,10,11,12];
+const YEAR_FOR = m => 2026;
+
+let currentGroup = "T4";
+let currentMonth = 9;
+
+function render(){
+  const t = I18N[currentLang];
+
+  document.querySelectorAll('.lang-btn').forEach(b=>{
+    b.classList.toggle('active', b.dataset.lang === currentLang);
+  });
+  document.documentElement.lang = currentLang;
+
+  document.getElementById('txt-eyebrow').textContent = t.eyebrow;
+  document.getElementById('txt-title').textContent = t.title;
+  document.getElementById('txt-subtitle').textContent = t.subtitle;
+  document.getElementById('txt-footer').textContent = t.footer;
+  document.getElementById('txt-fullscreen').textContent = t.fullscreen;
+
+  ['T4','E4','A4','C4'].forEach(g=>{
+    document.getElementById('lbl-'+g).textContent = GROUP_SHORT[g];
+  });
+
+  document.querySelectorAll('.group-btn').forEach(b=>{
+    b.classList.toggle('active', b.dataset.grp === currentGroup);
+  });
+  document.getElementById('scheduleLine').innerHTML =
+    t.schedule(GROUP_META[currentGroup][currentLang], SCHEDULES[currentGroup][currentLang]);
+
+  const allEvents = EVENTS[currentGroup];
+  const monthTabs = document.getElementById('monthTabs');
+  monthTabs.innerHTML = '';
+  MONTH_KEYS.forEach(mkey=>{
+    const count = allEvents.filter(e=>e.m===mkey).length;
+    const btn = document.createElement('button');
+    btn.className = 'month-tab' + (mkey===currentMonth ? ' active' : '');
+    btn.innerHTML = `${t.months[mkey]}<span class="count">(${count})</span>`;
+    btn.addEventListener('click', ()=>{ currentMonth = mkey; render(); });
+    monthTabs.appendChild(btn);
+  });
+
+  const monthEvents = allEvents
+    .filter(e=>e.m===currentMonth)
+    .sort((a,b)=> a.d - b.d);
+
+  const timeline = document.getElementById('timeline');
+  timeline.innerHTML = '';
+
+  if(monthEvents.length===0){
+    timeline.innerHTML = `<div style="color:var(--muted);font-size:14px;padding:20px 0;">${t.noSessions(currentGroup)}</div>`;
+    return;
+  }
+
+  monthEvents.forEach(ev=>{
+    const card = document.createElement('div');
+    card.className = `session-card type-${ev.type}`;
+    const dow = dowLabel(ev.d, ev.m, YEAR_FOR(ev.m));
+    const title = t.titles[ev.obs] || ev.obs;
+    const isFestiu = ev.type === 'festiu';
+    card.innerHTML = `
+      <div class="s-date">
+        <div class="d">${ev.d}</div>
+        <div class="dow">${dow}</div>
+      </div>
+      <div class="s-body">
+        <span class="s-tag">${t.typeLabel[ev.type]}</span>
+        <div class="s-title">${title}</div>
+        ${ev.room ? `<div class="s-sub">${t.roomLabel} ${ev.room}</div>` : ''}
+        ${ev.note ? `<div class="s-note">⚠ ${t[ev.note]}</div>` : ''}
+      </div>
+      ${isFestiu ? '' : `<div class="s-time">${ev.start}–${ev.end}</div>`}
+    `;
+    timeline.appendChild(card);
+  });
+}
+
+document.getElementById('groupSelect').addEventListener('click', (e)=>{
+  const btn = e.target.closest('.group-btn');
+  if(!btn) return;
+  currentGroup = btn.dataset.grp;
+  render();
+});
+
+document.getElementById('langSelect').addEventListener('click', (e)=>{
+  const btn = e.target.closest('.lang-btn');
+  if(!btn) return;
+  currentLang = btn.dataset.lang;
+  render();
+});
+
+document.getElementById('fullscreenBtn').addEventListener('click', ()=>{
+  if(!document.fullscreenElement){
+    document.documentElement.requestFullscreen().catch(()=>{});
+  } else {
+    document.exitFullscreen().catch(()=>{});
+  }
+});
+
+document.addEventListener('fullscreenchange', ()=>{
+  const t = I18N[currentLang];
+  const label = document.getElementById('txt-fullscreen');
+  label.textContent = document.fullscreenElement ? t.exitFullscreen : t.fullscreen;
+});
+
+render();
+</script>
+</body>
+
+</html>

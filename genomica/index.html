@@ -211,6 +211,10 @@
     opacity:.72;
   }
   .session-card.type-festiu:hover{transform:none;box-shadow:none;}
+  .session-card.type-lliurament{
+    border-left:3px solid var(--amber);
+    background:#fdf3e4;
+  }
 
   .s-date{
     flex:none;
@@ -248,6 +252,7 @@
   .type-tutoria .s-tag{color:var(--amber);}
   .type-avaluacio .s-tag{color:var(--rose);}
   .type-festiu .s-tag{color:var(--grey);}
+  .type-lliurament .s-tag{color:var(--amber);font-weight:600;}
 
   .s-title{
     font-weight:600;
@@ -433,7 +438,7 @@ const I18N = {
     months: {9:"September",10:"October",11:"November",12:"December"},
     roomLabel: "Room",
     examLocationNote: "Exam at the computer room (TBC) + class continues afterwards in Room 211",
-    typeLabel: {classe:"Class", avaluacio:"Exam", festiu:"Holiday"},
+    typeLabel: {classe:"Class", avaluacio:"Exam", festiu:"Holiday", lliurament:"Deadline"},
     dow: ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
     titles: {
       "Welcome+intro genomics I":"Welcome to the course + What is genomics? (I)",
@@ -451,6 +456,9 @@ const I18N = {
       "Bacteriophages":"Bacteriophage therapy of infections",
       "CRISPR":"Editing genomes with CRISPR/Cas9",
       "Exam 2":"Exam 2",
+      "Exam 2 Combined":"Exam 2 / Single-assessment exam",
+      "Reavaluacio":"Resit exam (single & continuous assessment)",
+      "Video Deadline":"Video assignment deadline",
       "Festiu (Diada)":"Public holiday (Diada Nacional)",
       "Festiu (La Mercè)":"Public holiday (La Mercè)",
       "Festiu (Immaculada)":"Public holiday (Immaculada Concepció)",
@@ -469,7 +477,7 @@ const I18N = {
     months: {9:"Setembre",10:"Octubre",11:"Novembre",12:"Desembre"},
     roomLabel: "Aula",
     examLocationNote: "Examen a l'aula d'informàtica (per confirmar) + continuació de classe a l'Aula 211",
-    typeLabel: {classe:"Classe", avaluacio:"Examen", festiu:"Festiu"},
+    typeLabel: {classe:"Classe", avaluacio:"Examen", festiu:"Festiu", lliurament:"Lliurament"},
     dow: ["diumenge","dilluns","dimarts","dimecres","dijous","divendres","dissabte"],
     titles: {
       "Welcome+intro genomics I":"Benvinguda al curs + Què és la genòmica? (I)",
@@ -487,6 +495,9 @@ const I18N = {
       "Bacteriophages":"Teràpia d'infeccions amb bacteriòfags",
       "CRISPR":"Edició de genomes amb CRISPR/Cas9",
       "Exam 2":"Examen 2",
+      "Exam 2 Combined":"Examen 2 / Examen d'avaluació única",
+      "Reavaluacio":"Reavaluació (avaluació única i continuada)",
+      "Video Deadline":"Lliurament del vídeo (activitat audiovisual)",
       "Festiu (Diada)":"Festiu (Diada Nacional)",
       "Festiu (La Mercè)":"Festiu (La Mercè)",
       "Festiu (Immaculada)":"Festiu (Immaculada Concepció)",
@@ -505,7 +516,7 @@ const I18N = {
     months: {9:"Septiembre",10:"Octubre",11:"Noviembre",12:"Diciembre"},
     roomLabel: "Aula",
     examLocationNote: "Examen en el aula de informática (por confirmar) + continuación de clase en el Aula 211",
-    typeLabel: {classe:"Clase", avaluacio:"Examen", festiu:"Festivo"},
+    typeLabel: {classe:"Clase", avaluacio:"Examen", festiu:"Festivo", lliurament:"Entrega"},
     dow: ["domingo","lunes","martes","miércoles","jueves","viernes","sábado"],
     titles: {
       "Welcome+intro genomics I":"Bienvenida al curso + ¿Qué es la genómica? (I)",
@@ -523,6 +534,9 @@ const I18N = {
       "Bacteriophages":"Terapia de infecciones con bacteriófagos",
       "CRISPR":"Edición de genomas con CRISPR/Cas9",
       "Exam 2":"Examen 2",
+      "Exam 2 Combined":"Examen 2 / Examen de evaluación única",
+      "Reavaluacio":"Reevaluación (evaluación única y continua)",
+      "Video Deadline":"Entrega del vídeo (actividad audiovisual)",
       "Festiu (Diada)":"Festivo (Diada Nacional)",
       "Festiu (La Mercè)":"Festivo (La Mercè)",
       "Festiu (Immaculada)":"Festivo (Immaculada Concepción)",
@@ -540,7 +554,9 @@ function dowLabel(d,m,y){
 
 function classify(obs){
   if(/^Exam/i.test(obs)) return 'avaluacio';
+  if(/^Reavaluacio/i.test(obs)) return 'avaluacio';
   if(/^Festiu|Dia no lectiu/i.test(obs)) return 'festiu';
+  if(/^Video Deadline/i.test(obs)) return 'lliurament';
   return 'classe';
 }
 
@@ -561,6 +577,8 @@ T4: [
  {d:24,m:11,obs:"CRISPR",start:'19:00',end:'20:30',room:'061'},
  {d:1,m:12,obs:"Exam 2",start:'19:00',end:'20:30'},
  {d:8,m:12,obs:"Festiu (Immaculada)",start:'19:00',end:'20:30'},
+ {d:15,m:12,obs:"Video Deadline",start:'',end:'',allDay:true},
+ {d:15,m:12,obs:"Reavaluacio",start:'19:00',end:'20:30'},
 ],
 E4: [
  {d:10,m:9,obs:"Welcome+intro genomics I",start:'11:30',end:'13:00',room:'4'},
@@ -577,6 +595,8 @@ E4: [
  {d:26,m:11,obs:"Bacteriophages",start:'11:30',end:'13:00',room:'4'},
  {d:3,m:12,obs:"CRISPR",start:'11:30',end:'13:00',room:'4'},
  {d:10,m:12,obs:"Exam 2",start:'11:30',end:'13:00'},
+ {d:15,m:12,obs:"Video Deadline",start:'',end:'',allDay:true},
+ {d:17,m:12,obs:"Reavaluacio",start:'11:30',end:'13:00'},
 ],
 A4: [
  {d:11,m:9,obs:"Festiu (Diada)",start:'11:30',end:'13:00'},
@@ -586,13 +606,15 @@ A4: [
  {d:9,m:10,obs:"Techniques seq II",start:'11:30',end:'13:00',room:'211'},
  {d:16,m:10,obs:"Genomic Diag",start:'11:30',end:'13:00',room:'211'},
  {d:23,m:10,obs:"PGX",start:'11:30',end:'13:00',room:'211'},
- {d:30,m:10,obs:"PGX Practical",start:'11:30',end:'13:00'},
- {d:6,m:11,obs:"Exam 1/Cancer IT",start:'11:30',end:'13:00'},
+ {d:30,m:10,obs:"PGX Practical",start:'11:30',end:'13:00',room:'212'},
+ {d:6,m:11,obs:"Exam 1/Cancer IT",start:'11:30',end:'13:00',room:'212'},
  {d:13,m:11,obs:"Cancer IT",start:'11:30',end:'13:00',room:'211'},
  {d:20,m:11,obs:"microbiota",start:'11:30',end:'13:00',room:'211'},
  {d:27,m:11,obs:"Bacteriophages",start:'11:30',end:'13:00',room:'211'},
  {d:4,m:12,obs:"CRISPR",start:'11:30',end:'13:00',room:'211'},
- {d:11,m:12,obs:"Exam 2",start:'11:30',end:'13:00'},
+ {d:11,m:12,obs:"Exam 2 Combined",start:'11:30',end:'13:00',room:'002'},
+ {d:15,m:12,obs:"Video Deadline",start:'',end:'',allDay:true},
+ {d:18,m:12,obs:"Reavaluacio",start:'11:30',end:'13:00',room:'212'},
 ],
 C4: [
  {d:11,m:9,obs:"Festiu (Diada)",start:'16:00',end:'17:30'},
@@ -602,13 +624,15 @@ C4: [
  {d:9,m:10,obs:"Techniques seq II",start:'16:00',end:'17:30',room:'211'},
  {d:16,m:10,obs:"Genomic Diag",start:'16:00',end:'17:30',room:'211'},
  {d:23,m:10,obs:"PGX",start:'16:00',end:'17:30',room:'211'},
- {d:30,m:10,obs:"PGX Practical",start:'16:00',end:'17:30'},
- {d:6,m:11,obs:"Exam 1/Cancer IT",start:'16:00',end:'17:30'},
+ {d:30,m:10,obs:"PGX Practical",start:'16:00',end:'17:30',room:'212'},
+ {d:6,m:11,obs:"Exam 1/Cancer IT",start:'16:00',end:'17:30',room:'212'},
  {d:13,m:11,obs:"Cancer IT",start:'16:00',end:'17:30',room:'211'},
  {d:20,m:11,obs:"microbiota",start:'16:00',end:'17:30',room:'211'},
  {d:27,m:11,obs:"Bacteriophages",start:'16:00',end:'17:30',room:'211'},
  {d:4,m:12,obs:"CRISPR",start:'16:00',end:'17:30',room:'211'},
- {d:11,m:12,obs:"Exam 2",start:'16:00',end:'17:30'},
+ {d:11,m:12,obs:"Exam 2 Combined",start:'16:00',end:'17:30',room:'003'},
+ {d:15,m:12,obs:"Video Deadline",start:'',end:'',allDay:true},
+ {d:18,m:12,obs:"Reavaluacio",start:'16:00',end:'17:30',room:'212'},
 ],
 };
 
@@ -677,6 +701,7 @@ function render(){
     const dow = dowLabel(ev.d, ev.m, YEAR_FOR(ev.m));
     const title = t.titles[ev.obs] || ev.obs;
     const isFestiu = ev.type === 'festiu';
+    const isAllDay = ev.allDay === true;
     card.innerHTML = `
       <div class="s-date">
         <div class="d">${ev.d}</div>
@@ -688,7 +713,7 @@ function render(){
         ${ev.room ? `<div class="s-sub">${t.roomLabel} ${ev.room}</div>` : ''}
         ${ev.note ? `<div class="s-note">⚠ ${t[ev.note]}</div>` : ''}
       </div>
-      ${isFestiu ? '' : `<div class="s-time">${ev.start}–${ev.end}</div>`}
+      ${(isFestiu || isAllDay) ? '' : `<div class="s-time">${ev.start}–${ev.end}</div>`}
     `;
     timeline.appendChild(card);
   });

@@ -437,6 +437,7 @@ const I18N = {
     exitFullscreen: "Exit full screen",
     months: {9:"September",10:"October",11:"November",12:"December"},
     roomLabel: "Room",
+    computerRoomLabel: "IT classroom",
     examLocationNote: "Exam at the computer room (TBC) + class continues afterwards in Room 211",
     typeLabel: {classe:"Class", avaluacio:"Exam", festiu:"Holiday", lliurament:"Deadline"},
     dow: ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
@@ -476,6 +477,7 @@ const I18N = {
     exitFullscreen: "Sortir de pantalla completa",
     months: {9:"Setembre",10:"Octubre",11:"Novembre",12:"Desembre"},
     roomLabel: "Aula",
+    computerRoomLabel: "Aula d'ordinadors",
     examLocationNote: "Examen a l'aula d'informàtica (per confirmar) + continuació de classe a l'Aula 211",
     typeLabel: {classe:"Classe", avaluacio:"Examen", festiu:"Festiu", lliurament:"Lliurament"},
     dow: ["diumenge","dilluns","dimarts","dimecres","dijous","divendres","dissabte"],
@@ -515,6 +517,7 @@ const I18N = {
     exitFullscreen: "Salir de pantalla completa",
     months: {9:"Septiembre",10:"Octubre",11:"Noviembre",12:"Diciembre"},
     roomLabel: "Aula",
+    computerRoomLabel: "Aula de informática",
     examLocationNote: "Examen en el aula de informática (por confirmar) + continuación de clase en el Aula 211",
     typeLabel: {classe:"Clase", avaluacio:"Examen", festiu:"Festivo", lliurament:"Entrega"},
     dow: ["domingo","lunes","martes","miércoles","jueves","viernes","sábado"],
@@ -606,15 +609,15 @@ A4: [
  {d:9,m:10,obs:"Techniques seq II",start:'11:30',end:'13:00',room:'211'},
  {d:16,m:10,obs:"Genomic Diag",start:'11:30',end:'13:00',room:'211'},
  {d:23,m:10,obs:"PGX",start:'11:30',end:'13:00',room:'211'},
- {d:30,m:10,obs:"PGX Practical",start:'11:30',end:'13:00',room:'212'},
- {d:6,m:11,obs:"Exam 1/Cancer IT",start:'11:30',end:'13:00',room:'212'},
+ {d:30,m:10,obs:"PGX Practical",start:'11:30',end:'13:00',room:'212',isComputerRoom:true},
+ {d:6,m:11,obs:"Exam 1/Cancer IT",start:'11:30',end:'13:00',room:'212',isComputerRoom:true},
  {d:13,m:11,obs:"Cancer IT",start:'11:30',end:'13:00',room:'211'},
  {d:20,m:11,obs:"microbiota",start:'11:30',end:'13:00',room:'211'},
  {d:27,m:11,obs:"Bacteriophages",start:'11:30',end:'13:00',room:'211'},
  {d:4,m:12,obs:"CRISPR",start:'11:30',end:'13:00',room:'211'},
- {d:11,m:12,obs:"Exam 2 Combined",start:'11:30',end:'13:00',room:'002'},
+ {d:11,m:12,obs:"Exam 2 Combined",start:'11:30',end:'13:00',room:'002',isComputerRoom:true},
  {d:15,m:12,obs:"Video Deadline",start:'',end:'',allDay:true},
- {d:18,m:12,obs:"Reavaluacio",start:'11:30',end:'13:00',room:'212'},
+ {d:18,m:12,obs:"Reavaluacio",start:'11:30',end:'13:00',room:'212',isComputerRoom:true},
 ],
 C4: [
  {d:11,m:9,obs:"Festiu (Diada)",start:'16:00',end:'17:30'},
@@ -624,15 +627,15 @@ C4: [
  {d:9,m:10,obs:"Techniques seq II",start:'16:00',end:'17:30',room:'211'},
  {d:16,m:10,obs:"Genomic Diag",start:'16:00',end:'17:30',room:'211'},
  {d:23,m:10,obs:"PGX",start:'16:00',end:'17:30',room:'211'},
- {d:30,m:10,obs:"PGX Practical",start:'16:00',end:'17:30',room:'212'},
- {d:6,m:11,obs:"Exam 1/Cancer IT",start:'16:00',end:'17:30',room:'212'},
+ {d:30,m:10,obs:"PGX Practical",start:'16:00',end:'17:30',room:'212',isComputerRoom:true},
+ {d:6,m:11,obs:"Exam 1/Cancer IT",start:'16:00',end:'17:30',room:'212',isComputerRoom:true},
  {d:13,m:11,obs:"Cancer IT",start:'16:00',end:'17:30',room:'211'},
  {d:20,m:11,obs:"microbiota",start:'16:00',end:'17:30',room:'211'},
  {d:27,m:11,obs:"Bacteriophages",start:'16:00',end:'17:30',room:'211'},
  {d:4,m:12,obs:"CRISPR",start:'16:00',end:'17:30',room:'211'},
- {d:11,m:12,obs:"Exam 2 Combined",start:'16:00',end:'17:30',room:'003'},
+ {d:11,m:12,obs:"Exam 2 Combined",start:'16:00',end:'17:30',room:'003',isComputerRoom:true},
  {d:15,m:12,obs:"Video Deadline",start:'',end:'',allDay:true},
- {d:18,m:12,obs:"Reavaluacio",start:'16:00',end:'17:30',room:'212'},
+ {d:18,m:12,obs:"Reavaluacio",start:'16:00',end:'17:30',room:'212',isComputerRoom:true},
 ],
 };
 
@@ -710,7 +713,7 @@ function render(){
       <div class="s-body">
         <span class="s-tag">${t.typeLabel[ev.type]}</span>
         <div class="s-title">${title}</div>
-        ${ev.room ? `<div class="s-sub">${t.roomLabel} ${ev.room}</div>` : ''}
+        ${ev.room ? `<div class="s-sub">${ev.isComputerRoom ? t.computerRoomLabel : t.roomLabel} ${ev.room}</div>` : ''}
         ${ev.note ? `<div class="s-note">⚠ ${t[ev.note]}</div>` : ''}
       </div>
       ${(isFestiu || isAllDay) ? '' : `<div class="s-time">${ev.start}–${ev.end}</div>`}

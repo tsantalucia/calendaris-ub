@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ca">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Genomics and Personalized Medicine — Calendar 26-27</title>
+<title>Calendari Mòdul Bioquímica — Curs 26-27</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
@@ -17,12 +17,12 @@
     --teal-deep:#123c39;
     --amber:#c47a2c;
     --rose:#a4433c;
-    --grey:#7a8a94;
     --muted:#4d6478;
-    --grp-t4:#1d5b57;
-    --grp-e4:#3d6b9c;
-    --grp-a4:#c47a2c;
-    --grp-c4:#a4433c;
+    --grp-a1:#1d5b57;
+    --grp-b1:#3d6b9c;
+    --grp-c1:#c47a2c;
+    --grp-d1:#a4433c;
+    --grp-m1:#6b4c8a;
     --radius:14px;
   }
   *{box-sizing:border-box;}
@@ -101,14 +101,16 @@
     color:#fff;
   }
   .group-btn.active .dot{background:currentColor;}
-  .group-btn[data-grp="T4"].active{background:var(--grp-t4);border-color:var(--grp-t4);}
-  .group-btn[data-grp="E4"].active{background:var(--grp-e4);border-color:var(--grp-e4);}
-  .group-btn[data-grp="A4"].active{background:var(--grp-a4);border-color:var(--grp-a4);}
-  .group-btn[data-grp="C4"].active{background:var(--grp-c4);border-color:var(--grp-c4);}
-  .group-btn[data-grp="T4"] .dot{background:var(--grp-t4);}
-  .group-btn[data-grp="E4"] .dot{background:var(--grp-e4);}
-  .group-btn[data-grp="A4"] .dot{background:var(--grp-a4);}
-  .group-btn[data-grp="C4"] .dot{background:var(--grp-c4);}
+  .group-btn[data-grp="A1"].active{background:var(--grp-a1);border-color:var(--grp-a1);}
+  .group-btn[data-grp="B1"].active{background:var(--grp-b1);border-color:var(--grp-b1);}
+  .group-btn[data-grp="C1"].active{background:var(--grp-c1);border-color:var(--grp-c1);}
+  .group-btn[data-grp="D1"].active{background:var(--grp-d1);border-color:var(--grp-d1);}
+  .group-btn[data-grp="M1"].active{background:var(--grp-m1);border-color:var(--grp-m1);}
+  .group-btn[data-grp="A1"] .dot{background:var(--grp-a1);}
+  .group-btn[data-grp="B1"] .dot{background:var(--grp-b1);}
+  .group-btn[data-grp="C1"] .dot{background:var(--grp-c1);}
+  .group-btn[data-grp="D1"] .dot{background:var(--grp-d1);}
+  .group-btn[data-grp="M1"] .dot{background:var(--grp-m1);}
 
   .schedule-line{
     font-size:13px;
@@ -204,17 +206,6 @@
   .session-card.type-tutoria{border-left:3px solid var(--amber);}
   .session-card.type-avaluacio{border-left:3px solid var(--rose);}
   .session-card.type-classe{border-left:3px solid var(--teal);}
-  .session-card.type-festiu{
-    border-left:3px solid var(--grey);
-    background:transparent;
-    box-shadow:none;
-    opacity:.72;
-  }
-  .session-card.type-festiu:hover{transform:none;box-shadow:none;}
-  .session-card.type-lliurament{
-    border-left:3px solid var(--amber);
-    background:#fdf3e4;
-  }
 
   .s-date{
     flex:none;
@@ -251,8 +242,6 @@
   .type-classe .s-tag{color:var(--teal);}
   .type-tutoria .s-tag{color:var(--amber);}
   .type-avaluacio .s-tag{color:var(--rose);}
-  .type-festiu .s-tag{color:var(--grey);}
-  .type-lliurament .s-tag{color:var(--amber);font-weight:600;}
 
   .s-title{
     font-weight:600;
@@ -372,8 +361,7 @@
         <span id="txt-fullscreen"></span>
       </button>
       <div class="lang-toggle">
-        <button class="lang-btn active" data-lang="en">EN</button>
-        <button class="lang-btn" data-lang="ca">CAT</button>
+        <button class="lang-btn active" data-lang="ca">CAT</button>
         <button class="lang-btn" data-lang="es">ESP</button>
       </div>
     </div>
@@ -383,10 +371,11 @@
   </header>
 
   <div class="group-select" id="groupSelect">
-    <button class="group-btn active" data-grp="T4"><span class="dot"></span><span id="lbl-T4">Group T4</span></button>
-    <button class="group-btn" data-grp="E4"><span class="dot"></span><span id="lbl-E4">Group E4</span></button>
-    <button class="group-btn" data-grp="A4"><span class="dot"></span><span id="lbl-A4">A4/B4/M4</span></button>
-    <button class="group-btn" data-grp="C4"><span class="dot"></span><span id="lbl-C4">C4/D4</span></button>
+    <button class="group-btn active" data-grp="A1"><span class="dot"></span>Grup A1</button>
+    <button class="group-btn" data-grp="B1"><span class="dot"></span>Grup B1</button>
+    <button class="group-btn" data-grp="C1"><span class="dot"></span>Grup C1</button>
+    <button class="group-btn" data-grp="D1"><span class="dot"></span>Grup D1</button>
+    <button class="group-btn" data-grp="M1"><span class="dot"></span>Grup M1</button>
   </div>
 
   <div class="schedule-line" id="scheduleLine"></div>
@@ -396,258 +385,182 @@
   <div class="timeline" id="timeline"></div>
 
   <footer>
-    <span id="txt-footer"></span>
+    <span id="txt-footer">Bioquímica · Facultat d'Infermeria, Universitat de Barcelona</span>
   </footer>
 
 </div>
 
 <script>
 /* ---------- DADES ---------- */
-// Font: Genomics and Personalized Medicine — Programació de sessions 2026/27
+// Font: programació BQ 1r semestre 2026/27
 const SCHEDULES = {
-  T4: { en:"Tuesday · 19:00–20:30", ca:"Dimarts · 19:00–20:30", es:"Martes · 19:00–20:30" },
-  E4: { en:"Thursday · 11:30–13:00", ca:"Dijous · 11:30–13:00", es:"Jueves · 11:30–13:00" },
-  A4: { en:"Friday · 11:30–13:00", ca:"Divendres · 11:30–13:00", es:"Viernes · 11:30–13:00" },
-  C4: { en:"Friday · 16:00–17:30", ca:"Divendres · 16:00–17:30", es:"Viernes · 16:00–17:30" },
-};
-
-const GROUP_META = {
-  T4: { en:"Group T4 · Campus Clínic · afternoon", ca:"Grup T4 · Campus Clínic · tarda", es:"Grupo T4 · Campus Clínic · tarde" },
-  E4: { en:"Group E4 · Campus Clínic · morning", ca:"Grup E4 · Campus Clínic · matí", es:"Grupo E4 · Campus Clínic · mañana" },
-  A4: { en:"Groups A4/B4/M4 · Campus Bellvitge · morning", ca:"Grups A4/B4/M4 · Campus Bellvitge · matí", es:"Grupos A4/B4/M4 · Campus Bellvitge · mañana" },
-  C4: { en:"Groups C4/D4 · Campus Bellvitge · afternoon", ca:"Grups C4/D4 · Campus Bellvitge · tarda", es:"Grupos C4/D4 · Campus Bellvitge · tarde" },
-};
-
-const GROUP_SHORT = {
-  T4: "T4",
-  E4: "E4",
-  A4: "A4/B4/M4",
-  C4: "C4/D4",
+  A1: "Dimarts · 11:00–12:30",
+  B1: "Dimecres · 11:00–12:30",
+  C1: "Dimecres · 14:30–16:00",
+  D1: "Dimecres · 19:00–20:30",
+  M1: "Dimarts · 08:00–09:30",
 };
 
 const I18N = {
-  en: {
-    eyebrow: "Academic Year 2026 – 2027 · Faculty of Nursing UB",
-    title: "Calendar — Genomics and Personalized Medicine",
-    subtitle: "4th year elective course. Check the sessions and exams for your group.",
-    schedule: (grpLabel, sched) => `<strong>${grpLabel}</strong> · usual weekly session: <strong>${sched}</strong>`,
-    noSessions: (grp) => `No sessions this month for group ${grp}.`,
-    footer: "Genomics and Personalized Medicine · Faculty of Nursing, Universitat de Barcelona",
-    fullscreen: "Full screen",
-    exitFullscreen: "Exit full screen",
-    months: {9:"September",10:"October",11:"November",12:"December"},
-    roomLabel: "Room",
-    computerRoomLabel: "IT classroom",
-    examLocationNote: "Exam at the computer room (TBC) + class continues afterwards in Room 211",
-    typeLabel: {classe:"Class", avaluacio:"Exam", festiu:"Holiday", lliurament:"Deadline"},
-    dow: ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
-    titles: {
-      "Welcome+intro genomics I":"Welcome to the course + What is genomics? (I)",
-      "Intro Genom II+Techniques I":"What is genomics? (II) + Techniques for studying the genome (I)",
-      "Techniques seq II":"Techniques for studying the genome (II)",
-      "Genomic Diag":"Genomic diagnostics",
-      "PGX":"Pharmacogenomics",
-      "PGX Practical":"Pharmacogenomics practical session",
-      "Exam 1":"Exam 1",
-      "Cancer IT-I":"Cancer immunotherapy (I)",
-      "Cancer IT-II":"Cancer immunotherapy (II)",
-      "Cancer IT":"Cancer immunotherapy (II)",
-      "Exam 1/Cancer IT":"Exam 1 / Cancer immunotherapy (I)",
-      "microbiota":"The human microbiota",
-      "Bacteriophages":"Bacteriophage therapy of infections",
-      "CRISPR":"Editing genomes with CRISPR/Cas9",
-      "Exam 2":"Exam 2",
-      "Exam 2 Combined":"Exam 2 / Single-assessment exam",
-      "Reavaluacio":"Resit exam (single & continuous assessment)",
-      "Video Deadline":"Video assignment deadline",
-      "Festiu (Diada)":"Public holiday (Diada Nacional)",
-      "Festiu (La Mercè)":"Public holiday (La Mercè)",
-      "Festiu (Immaculada)":"Public holiday (Immaculada Concepció)",
-      "Dia no lectiu":"Non-teaching day",
-    },
-  },
   ca: {
     eyebrow: "Curs 2026 – 2027 · Facultat d'Infermeria UB",
-    title: "Calendari — Genomics and Personalized Medicine",
-    subtitle: "Assignatura optativa de quart curs. Consulta les sessions i exàmens del teu grup.",
-    schedule: (grpLabel, sched) => `<strong>${grpLabel}</strong> · sessió setmanal habitual: <strong>${sched}</strong>`,
+    title: "Calendari — Mòdul de Bioquímica",
+    subtitle: "Assignatura Bioquímica, Microbiologia i Nutrició, primer semestre. Consulta les sessions, tutories i avaluacions del teu grup.",
+    schedule: (grp, sched) => `Grup <strong>${grp}</strong> · sessió setmanal habitual: <strong>${sched}</strong>`,
     noSessions: (grp) => `Cap sessió aquest mes per al grup ${grp}.`,
-    footer: "Genomics and Personalized Medicine · Facultat d'Infermeria, Universitat de Barcelona",
+    footer: "Bioquímica · Facultat d'Infermeria, Universitat de Barcelona",
+    computerRoom: "Aula d'ordinadors",
     fullscreen: "Pantalla completa",
     exitFullscreen: "Sortir de pantalla completa",
     months: {9:"Setembre",10:"Octubre",11:"Novembre",12:"Desembre"},
-    roomLabel: "Aula",
-    computerRoomLabel: "Aula d'ordinadors",
-    examLocationNote: "Examen a l'aula d'informàtica (per confirmar) + continuació de classe a l'Aula 211",
-    typeLabel: {classe:"Classe", avaluacio:"Examen", festiu:"Festiu", lliurament:"Lliurament"},
+    typeLabel: {classe:"Classe", tutoria:"Tutoria", avaluacio:"Avaluació"},
     dow: ["diumenge","dilluns","dimarts","dimecres","dijous","divendres","dissabte"],
     titles: {
-      "Welcome+intro genomics I":"Benvinguda al curs + Què és la genòmica? (I)",
-      "Intro Genom II+Techniques I":"Què és la genòmica? (II) + Tècniques per a l'estudi del genoma (I)",
-      "Techniques seq II":"Tècniques per a l'estudi del genoma (II)",
-      "Genomic Diag":"Diagnòstic genòmic",
-      "PGX":"Farmacogenòmica",
-      "PGX Practical":"Sessió pràctica de farmacogenòmica",
-      "Exam 1":"Examen 1",
-      "Cancer IT-I":"Immunoteràpia del càncer (I)",
-      "Cancer IT-II":"Immunoteràpia del càncer (II)",
-      "Cancer IT":"Immunoteràpia del càncer (II)",
-      "Exam 1/Cancer IT":"Examen 1 / Immunoteràpia del càncer (I)",
-      "microbiota":"La microbiota humana",
-      "Bacteriophages":"Teràpia d'infeccions amb bacteriòfags",
-      "CRISPR":"Edició de genomes amb CRISPR/Cas9",
-      "Exam 2":"Examen 2",
-      "Exam 2 Combined":"Examen 2 / Examen d'avaluació única",
-      "Reavaluacio":"Reavaluació (avaluació única i continuada)",
-      "Video Deadline":"Lliurament del vídeo (activitat audiovisual)",
-      "Festiu (Diada)":"Festiu (Diada Nacional)",
-      "Festiu (La Mercè)":"Festiu (La Mercè)",
-      "Festiu (Immaculada)":"Festiu (Immaculada Concepció)",
-      "Dia no lectiu":"Dia no lectiu",
+      "Introducció al metabolisme I":"Introducció al metabolisme I",
+      "Introducció al metabolisme II":"Introducció al metabolisme II",
+      "Metabolisme de glúcids I":"Metabolisme de glúcids I",
+      "Metabolisme de glúcids II":"Metabolisme de glúcids II",
+      "Tutoria 1 · Concentració de solucions":"Tutoria 1 · Concentració de solucions",
+      "Metabolisme de lipoproteïnes":"Metabolisme de lipoproteïnes",
+      "Avaluador 1":"Avaluador 1",
+      "Metabolisme de lípids I":"Metabolisme de lípids I",
+      "Metabolisme de lípids II":"Metabolisme de lípids II",
+      "Metabolisme d'aminoàcids I":"Metabolisme d'aminoàcids I",
+      "Tutoria 2 · BQ clínica":"Tutoria 2 · BQ clínica",
+      "Metabolisme d'aminoàcids II":"Metabolisme d'aminoàcids II",
+      "Integració del metabolisme":"Integració del metabolisme",
+      "Avaluador 2":"Avaluador 2",
     },
+    noteIntercanvi: "Sessió en dilluns · Intercanvi amb Nutrició",
   },
   es: {
     eyebrow: "Curso 2026 – 2027 · Facultad de Enfermería UB",
-    title: "Calendario — Genomics and Personalized Medicine",
-    subtitle: "Asignatura optativa de cuarto curso. Consulta las sesiones y exámenes de tu grupo.",
-    schedule: (grpLabel, sched) => `<strong>${grpLabel}</strong> · sesión semanal habitual: <strong>${sched}</strong>`,
+    title: "Calendario — Módulo de Bioquímica",
+    subtitle: "Asignatura Bioquímica, Microbiología y Nutrición, primer semestre. Consulta las sesiones, tutorías y evaluaciones de tu grupo.",
+    schedule: (grp, sched) => `Grupo <strong>${grp}</strong> · sesión semanal habitual: <strong>${sched}</strong>`,
     noSessions: (grp) => `Ninguna sesión este mes para el grupo ${grp}.`,
-    footer: "Genomics and Personalized Medicine · Facultad de Enfermería, Universitat de Barcelona",
+    footer: "Bioquímica · Facultad de Enfermería, Universitat de Barcelona",
+    computerRoom: "Aula de informática",
     fullscreen: "Pantalla completa",
     exitFullscreen: "Salir de pantalla completa",
     months: {9:"Septiembre",10:"Octubre",11:"Noviembre",12:"Diciembre"},
-    roomLabel: "Aula",
-    computerRoomLabel: "Aula de informática",
-    examLocationNote: "Examen en el aula de informática (por confirmar) + continuación de clase en el Aula 211",
-    typeLabel: {classe:"Clase", avaluacio:"Examen", festiu:"Festivo", lliurament:"Entrega"},
+    typeLabel: {classe:"Clase", tutoria:"Tutoría", avaluacio:"Evaluación"},
     dow: ["domingo","lunes","martes","miércoles","jueves","viernes","sábado"],
     titles: {
-      "Welcome+intro genomics I":"Bienvenida al curso + ¿Qué es la genómica? (I)",
-      "Intro Genom II+Techniques I":"¿Qué es la genómica? (II) + Técnicas para el estudio del genoma (I)",
-      "Techniques seq II":"Técnicas para el estudio del genoma (II)",
-      "Genomic Diag":"Diagnóstico genómico",
-      "PGX":"Farmacogenómica",
-      "PGX Practical":"Sesión práctica de farmacogenómica",
-      "Exam 1":"Examen 1",
-      "Cancer IT-I":"Inmunoterapia del cáncer (I)",
-      "Cancer IT-II":"Inmunoterapia del cáncer (II)",
-      "Cancer IT":"Inmunoterapia del cáncer (II)",
-      "Exam 1/Cancer IT":"Examen 1 / Inmunoterapia del cáncer (I)",
-      "microbiota":"La microbiota humana",
-      "Bacteriophages":"Terapia de infecciones con bacteriófagos",
-      "CRISPR":"Edición de genomas con CRISPR/Cas9",
-      "Exam 2":"Examen 2",
-      "Exam 2 Combined":"Examen 2 / Examen de evaluación única",
-      "Reavaluacio":"Reevaluación (evaluación única y continua)",
-      "Video Deadline":"Entrega del vídeo (actividad audiovisual)",
-      "Festiu (Diada)":"Festivo (Diada Nacional)",
-      "Festiu (La Mercè)":"Festivo (La Mercè)",
-      "Festiu (Immaculada)":"Festivo (Immaculada Concepción)",
-      "Dia no lectiu":"Día no lectivo",
+      "Introducció al metabolisme I":"Introducción al metabolismo I",
+      "Introducció al metabolisme II":"Introducción al metabolismo II",
+      "Metabolisme de glúcids I":"Metabolismo de glúcidos I",
+      "Metabolisme de glúcids II":"Metabolismo de glúcidos II",
+      "Tutoria 1 · Concentració de solucions":"Tutoría 1 · Concentración de soluciones",
+      "Metabolisme de lipoproteïnes":"Metabolismo de lipoproteínas",
+      "Avaluador 1":"Evaluador 1",
+      "Metabolisme de lípids I":"Metabolismo de lípidos I",
+      "Metabolisme de lípids II":"Metabolismo de lípidos II",
+      "Metabolisme d'aminoàcids I":"Metabolismo de aminoácidos I",
+      "Tutoria 2 · BQ clínica":"Tutoría 2 · BQ clínica",
+      "Metabolisme d'aminoàcids II":"Metabolismo de aminoácidos II",
+      "Integració del metabolisme":"Integración del metabolismo",
+      "Avaluador 2":"Evaluador 2",
     },
+    noteIntercanvi: "Sesión en lunes · Intercambio con Nutrición",
   }
 };
 
-let currentLang = "en";
+let currentLang = "ca";
 
 function dowLabel(d,m,y){
   const dt = new Date(y,m-1,d);
   return I18N[currentLang].dow[dt.getDay()];
 }
 
-function classify(obs){
-  if(/^Exam/i.test(obs)) return 'avaluacio';
-  if(/^Reavaluacio/i.test(obs)) return 'avaluacio';
-  if(/^Festiu|Dia no lectiu/i.test(obs)) return 'festiu';
-  if(/^Video Deadline/i.test(obs)) return 'lliurament';
-  return 'classe';
-}
-
-// events[group] = array of {d,m,type,title,start,end}
+// events[group] = array of {d,m,type,title,sub,start,end,note}
 const EVENTS = {
-T4: [
- {d:8,m:9,obs:"Welcome+intro genomics I",start:'19:00',end:'20:30',room:'061'},
- {d:15,m:9,obs:"Intro Genom II+Techniques I",start:'19:00',end:'20:30',room:'061'},
- {d:22,m:9,obs:"Techniques seq II",start:'19:00',end:'20:30',room:'061'},
- {d:29,m:9,obs:"Genomic Diag",start:'19:00',end:'20:30',room:'061'},
- {d:6,m:10,obs:"PGX",start:'19:00',end:'20:30',room:'061'},
- {d:13,m:10,obs:"PGX Practical",start:'19:00',end:'20:30'},
- {d:20,m:10,obs:"Exam 1",start:'19:00',end:'20:30'},
- {d:27,m:10,obs:"Cancer IT-I",start:'19:00',end:'20:30',room:'061'},
- {d:3,m:11,obs:"Cancer IT-II",start:'19:00',end:'20:30',room:'061'},
- {d:10,m:11,obs:"microbiota",start:'19:00',end:'20:30',room:'061'},
- {d:17,m:11,obs:"Bacteriophages",start:'19:00',end:'20:30',room:'061'},
- {d:24,m:11,obs:"CRISPR",start:'19:00',end:'20:30',room:'061'},
- {d:1,m:12,obs:"Exam 2 Combined",start:'19:00',end:'20:30'},
- {d:8,m:12,obs:"Festiu (Immaculada)",start:'19:00',end:'20:30'},
- {d:15,m:12,obs:"Video Deadline",start:'',end:'',allDay:true},
- {d:15,m:12,obs:"Reavaluacio",start:'19:00',end:'20:30'},
+A1: [
+ {d:15,m:9,type:'classe',title:"Introducció al metabolisme I",sub:"Aula 102",start:'11:00',end:'12:30'},
+ {d:22,m:9,type:'classe',title:"Introducció al metabolisme II",sub:"Aula 102",start:'11:00',end:'12:30'},
+ {d:29,m:9,type:'classe',title:"Metabolisme de glúcids I",sub:"Aula 102",start:'11:00',end:'12:30'},
+ {d:6,m:10,type:'classe',title:"Metabolisme de glúcids II",sub:"Aula 102",start:'11:00',end:'12:30'},
+ {d:9,m:10,type:'tutoria',title:"Tutoria 1 · Concentració de solucions",sub:"Aula 104",start:'08:30',end:'10:00'},
+ {d:13,m:10,type:'classe',title:"Metabolisme de lipoproteïnes",sub:"Aula 102",start:'11:00',end:'12:30'},
+ {d:20,m:10,type:'avaluacio',title:"Avaluador 1",sub:"__COMPUTER_ROOM__",start:'11:00',end:'12:30'},
+ {d:27,m:10,type:'classe',title:"Metabolisme de lípids I",sub:"Aula 102",start:'11:00',end:'12:30'},
+ {d:3,m:11,type:'classe',title:"Metabolisme de lípids II",sub:"Aula 102",start:'11:00',end:'12:30'},
+ {d:10,m:11,type:'classe',title:"Metabolisme d'aminoàcids I",sub:"Aula 102",start:'11:00',end:'12:30'},
+ {d:13,m:11,type:'tutoria',title:"Tutoria 2 · BQ clínica",sub:"Aula 104",start:'10:00',end:'11:30'},
+ {d:17,m:11,type:'classe',title:"Metabolisme d'aminoàcids II",sub:"Aula 102",start:'11:00',end:'12:30'},
+ {d:24,m:11,type:'classe',title:"Integració del metabolisme",sub:"Aula 102",start:'11:00',end:'12:30'},
+ {d:1,m:12,type:'avaluacio',title:"Avaluador 2",sub:"__COMPUTER_ROOM__",start:'11:00',end:'12:30'},
 ],
-E4: [
- {d:10,m:9,obs:"Welcome+intro genomics I",start:'11:30',end:'13:00',room:'4'},
- {d:17,m:9,obs:"Intro Genom II+Techniques I",start:'11:30',end:'13:00',room:'4'},
- {d:24,m:9,obs:"Festiu (La Mercè)",start:'11:30',end:'13:00'},
- {d:1,m:10,obs:"Techniques seq II",start:'11:30',end:'13:00',room:'4'},
- {d:8,m:10,obs:"Genomic Diag",start:'11:30',end:'13:00',room:'4'},
- {d:15,m:10,obs:"PGX",start:'11:30',end:'13:00',room:'4'},
- {d:22,m:10,obs:"PGX Practical",start:'11:30',end:'13:00'},
- {d:29,m:10,obs:"Exam 1",start:'11:30',end:'13:00'},
- {d:5,m:11,obs:"Cancer IT-I",start:'11:30',end:'13:00',room:'4'},
- {d:12,m:11,obs:"Cancer IT-II",start:'11:30',end:'13:00',room:'4'},
- {d:19,m:11,obs:"microbiota",start:'11:30',end:'13:00',room:'4'},
- {d:26,m:11,obs:"Bacteriophages",start:'11:30',end:'13:00',room:'4'},
- {d:3,m:12,obs:"CRISPR",start:'11:30',end:'13:00',room:'4'},
- {d:10,m:12,obs:"Exam 2 Combined",start:'11:30',end:'13:00'},
- {d:15,m:12,obs:"Video Deadline",start:'',end:'',allDay:true},
- {d:17,m:12,obs:"Reavaluacio",start:'11:30',end:'13:00'},
+B1: [
+ {d:16,m:9,type:'classe',title:"Introducció al metabolisme I",sub:"Aula 108",start:'11:00',end:'12:30'},
+ {d:23,m:9,type:'classe',title:"Introducció al metabolisme II",sub:"Aula 108",start:'11:00',end:'12:30'},
+ {d:30,m:9,type:'classe',title:"Metabolisme de glúcids I",sub:"Aula 108",start:'11:00',end:'12:30'},
+ {d:2,m:10,type:'tutoria',title:"Tutoria 1 · Concentració de solucions",sub:"Aula 108",start:'10:00',end:'11:30'},
+ {d:7,m:10,type:'classe',title:"Metabolisme de glúcids II",sub:"Aula 108",start:'11:00',end:'12:30'},
+ {d:14,m:10,type:'classe',title:"Metabolisme de lipoproteïnes",sub:"Aula 108",start:'11:00',end:'12:30'},
+ {d:21,m:10,type:'avaluacio',title:"Avaluador 1",sub:"__COMPUTER_ROOM__",start:'11:00',end:'12:30'},
+ {d:28,m:10,type:'classe',title:"Metabolisme de lípids I",sub:"Aula 108",start:'11:00',end:'12:30'},
+ {d:4,m:11,type:'classe',title:"Metabolisme de lípids II",sub:"Aula 108",start:'11:00',end:'12:30'},
+ {d:11,m:11,type:'classe',title:"Metabolisme d'aminoàcids I",sub:"Aula 108",start:'11:00',end:'12:30'},
+ {d:13,m:11,type:'tutoria',title:"Tutoria 2 · BQ clínica",sub:"Aula 104",start:'08:30',end:'10:00'},
+ {d:18,m:11,type:'classe',title:"Metabolisme d'aminoàcids II",sub:"Aula 108",start:'11:00',end:'12:30'},
+ {d:25,m:11,type:'classe',title:"Integració del metabolisme",sub:"Aula 108",start:'11:00',end:'12:30'},
+ {d:2,m:12,type:'avaluacio',title:"Avaluador 2",sub:"__COMPUTER_ROOM__",start:'11:00',end:'12:30'},
 ],
-A4: [
- {d:11,m:9,obs:"Festiu (Diada)",start:'11:30',end:'13:00'},
- {d:18,m:9,obs:"Welcome+intro genomics I",start:'11:30',end:'13:00',room:'211'},
- {d:25,m:9,obs:"Dia no lectiu",start:'11:30',end:'13:00'},
- {d:2,m:10,obs:"Intro Genom II+Techniques I",start:'11:30',end:'13:00',room:'211'},
- {d:9,m:10,obs:"Techniques seq II",start:'11:30',end:'13:00',room:'211'},
- {d:16,m:10,obs:"Genomic Diag",start:'11:30',end:'13:00',room:'211'},
- {d:23,m:10,obs:"PGX",start:'11:30',end:'13:00',room:'211'},
- {d:30,m:10,obs:"PGX Practical",start:'11:30',end:'13:00',room:'212',isComputerRoom:true},
- {d:6,m:11,obs:"Exam 1/Cancer IT",start:'11:30',end:'13:00',room:'212',isComputerRoom:true},
- {d:13,m:11,obs:"Cancer IT",start:'11:30',end:'13:00',room:'211'},
- {d:20,m:11,obs:"microbiota",start:'11:30',end:'13:00',room:'211'},
- {d:27,m:11,obs:"Bacteriophages",start:'11:30',end:'13:00',room:'211'},
- {d:4,m:12,obs:"CRISPR",start:'11:30',end:'13:00',room:'211'},
- {d:11,m:12,obs:"Exam 2 Combined",start:'11:30',end:'13:00',room:'002',isComputerRoom:true},
- {d:15,m:12,obs:"Video Deadline",start:'',end:'',allDay:true},
- {d:18,m:12,obs:"Reavaluacio",start:'11:30',end:'13:00',room:'212',isComputerRoom:true},
+C1: [
+ {d:16,m:9,type:'classe',title:"Introducció al metabolisme I",sub:"Aula 104",start:'14:30',end:'16:00'},
+ {d:23,m:9,type:'classe',title:"Introducció al metabolisme II",sub:"Aula 104",start:'14:30',end:'16:00'},
+ {d:30,m:9,type:'classe',title:"Metabolisme de glúcids I",sub:"Aula 104",start:'14:30',end:'16:00'},
+ {d:2,m:10,type:'tutoria',title:"Tutoria 1 · Concentració de solucions",sub:"Aula 106",start:'14:30',end:'16:00'},
+ {d:7,m:10,type:'classe',title:"Metabolisme de glúcids II",sub:"Aula 104",start:'14:30',end:'16:00'},
+ {d:14,m:10,type:'classe',title:"Metabolisme de lipoproteïnes",sub:"Aula 104",start:'14:30',end:'16:00'},
+ {d:21,m:10,type:'avaluacio',title:"Avaluador 1",sub:"__COMPUTER_ROOM__",start:'14:30',end:'16:00'},
+ {d:28,m:10,type:'classe',title:"Metabolisme de lípids I",sub:"Aula 104",start:'14:30',end:'16:00'},
+ {d:4,m:11,type:'classe',title:"Metabolisme de lípids II",sub:"Aula 104",start:'14:30',end:'16:00'},
+ {d:11,m:11,type:'classe',title:"Metabolisme d'aminoàcids I",sub:"Aula 104",start:'14:30',end:'16:00'},
+ {d:6,m:11,type:'tutoria',title:"Tutoria 2 · BQ clínica",sub:"Aula 104",start:'17:30',end:'19:00'},
+ {d:18,m:11,type:'classe',title:"Metabolisme d'aminoàcids II",sub:"Aula 104",start:'14:30',end:'16:00'},
+ {d:25,m:11,type:'classe',title:"Integració del metabolisme",sub:"Aula 104",start:'14:30',end:'16:00'},
+ {d:2,m:12,type:'avaluacio',title:"Avaluador 2",sub:"__COMPUTER_ROOM__",start:'14:30',end:'16:00'},
 ],
-C4: [
- {d:11,m:9,obs:"Festiu (Diada)",start:'16:00',end:'17:30'},
- {d:18,m:9,obs:"Welcome+intro genomics I",start:'16:00',end:'17:30',room:'211'},
- {d:25,m:9,obs:"Dia no lectiu",start:'16:00',end:'17:30'},
- {d:2,m:10,obs:"Intro Genom II+Techniques I",start:'16:00',end:'17:30',room:'211'},
- {d:9,m:10,obs:"Techniques seq II",start:'16:00',end:'17:30',room:'211'},
- {d:16,m:10,obs:"Genomic Diag",start:'16:00',end:'17:30',room:'211'},
- {d:23,m:10,obs:"PGX",start:'16:00',end:'17:30',room:'211'},
- {d:30,m:10,obs:"PGX Practical",start:'16:00',end:'17:30',room:'212',isComputerRoom:true},
- {d:6,m:11,obs:"Exam 1/Cancer IT",start:'16:00',end:'17:30',room:'212',isComputerRoom:true},
- {d:13,m:11,obs:"Cancer IT",start:'16:00',end:'17:30',room:'211'},
- {d:20,m:11,obs:"microbiota",start:'16:00',end:'17:30',room:'211'},
- {d:27,m:11,obs:"Bacteriophages",start:'16:00',end:'17:30',room:'211'},
- {d:4,m:12,obs:"CRISPR",start:'16:00',end:'17:30',room:'211'},
- {d:11,m:12,obs:"Exam 2 Combined",start:'16:00',end:'17:30',room:'003',isComputerRoom:true},
- {d:15,m:12,obs:"Video Deadline",start:'',end:'',allDay:true},
- {d:18,m:12,obs:"Reavaluacio",start:'16:00',end:'17:30',room:'212',isComputerRoom:true},
+D1: [
+ {d:16,m:9,type:'classe',title:"Introducció al metabolisme I",sub:"Aula 108",start:'19:00',end:'20:30'},
+ {d:23,m:9,type:'classe',title:"Introducció al metabolisme II",sub:"Aula 108",start:'19:00',end:'20:30'},
+ {d:30,m:9,type:'classe',title:"Metabolisme de glúcids I",sub:"Aula 108",start:'19:00',end:'20:30'},
+ {d:7,m:10,type:'classe',title:"Metabolisme de glúcids II",sub:"Aula 108",start:'19:00',end:'20:30'},
+ {d:9,m:10,type:'tutoria',title:"Tutoria 1 · Concentració de solucions",sub:"Aula 104",start:'14:30',end:'16:00'},
+ {d:14,m:10,type:'classe',title:"Metabolisme de lipoproteïnes",sub:"Aula 108",start:'19:00',end:'20:30'},
+ {d:21,m:10,type:'avaluacio',title:"Avaluador 1",sub:"__COMPUTER_ROOM__",start:'19:00',end:'20:30'},
+ {d:28,m:10,type:'classe',title:"Metabolisme de lípids I",sub:"Aula 108",start:'19:00',end:'20:30'},
+ {d:4,m:11,type:'classe',title:"Metabolisme de lípids II",sub:"Aula 108",start:'19:00',end:'20:30'},
+ {d:11,m:11,type:'classe',title:"Metabolisme d'aminoàcids I",sub:"Aula 108",start:'19:00',end:'20:30'},
+ {d:13,m:11,type:'tutoria',title:"Tutoria 2 · BQ clínica",sub:"Aula 104",start:'17:30',end:'19:00'},
+ {d:18,m:11,type:'classe',title:"Metabolisme d'aminoàcids II",sub:"Aula 108",start:'19:00',end:'20:30'},
+ {d:25,m:11,type:'classe',title:"Integració del metabolisme",sub:"Aula 108",start:'19:00',end:'20:30'},
+ {d:2,m:12,type:'avaluacio',title:"Avaluador 2",sub:"__COMPUTER_ROOM__",start:'19:00',end:'20:30'},
+],
+M1: [
+ {d:15,m:9,type:'classe',title:"Introducció al metabolisme I",sub:"Aula 104",start:'08:00',end:'09:30'},
+ {d:22,m:9,type:'classe',title:"Introducció al metabolisme II",sub:"Aula 104",start:'08:00',end:'09:30'},
+ {d:29,m:9,type:'classe',title:"Metabolisme de glúcids I",sub:"Aula 104",start:'08:00',end:'09:30'},
+ {d:6,m:10,type:'classe',title:"Metabolisme de glúcids II",sub:"Aula 104",start:'08:00',end:'09:30'},
+ {d:9,m:10,type:'tutoria',title:"Tutoria 1 · Concentració de solucions",sub:"Aula 104",start:'10:00',end:'11:30'},
+ {d:13,m:10,type:'classe',title:"Metabolisme de lipoproteïnes",sub:"Aula 104",start:'08:00',end:'09:30'},
+ {d:20,m:10,type:'avaluacio',title:"Avaluador 1",sub:"__COMPUTER_ROOM__",start:'08:00',end:'09:30'},
+ {d:27,m:10,type:'classe',title:"Metabolisme de lípids I",sub:"Aula 104",start:'08:00',end:'09:30'},
+ {d:3,m:11,type:'classe',title:"Metabolisme de lípids II",sub:"Aula 104",start:'08:00',end:'09:30'},
+ {d:10,m:11,type:'classe',title:"Metabolisme d'aminoàcids I",sub:"Aula 104",start:'08:00',end:'09:30'},
+ {d:13,m:11,type:'tutoria',title:"Tutoria 2 · BQ clínica",sub:"Aula 104",start:'13:00',end:'14:30'},
+ {d:17,m:11,type:'classe',title:"Metabolisme d'aminoàcids II",sub:"Aula 104",start:'08:00',end:'09:30'},
+ {d:24,m:11,type:'classe',title:"Integració del metabolisme",sub:"Aula 104",start:'08:00',end:'09:30'},
+ {d:30,m:11,type:'avaluacio',title:"Avaluador 2",sub:"__COMPUTER_ROOM__",start:'09:30',end:'11:00',note:"Sessió en dilluns · Intercanvi amb Nutrició"},
 ],
 };
 
-// assign type to each event based on its observation text
-Object.keys(EVENTS).forEach(g=>{
-  EVENTS[g].forEach(ev=>{ ev.type = classify(ev.obs); });
-});
-
 const MONTH_KEYS = [9,10,11,12];
-const YEAR_FOR = m => 2026;
+const YEAR_FOR = m => m === 12 ? 2026 : 2026;
 
-let currentGroup = "T4";
+let currentGroup = "A1";
 let currentMonth = 9;
 
 function render(){
@@ -664,15 +577,11 @@ function render(){
   document.getElementById('txt-footer').textContent = t.footer;
   document.getElementById('txt-fullscreen').textContent = t.fullscreen;
 
-  ['T4','E4','A4','C4'].forEach(g=>{
-    document.getElementById('lbl-'+g).textContent = GROUP_SHORT[g];
-  });
-
   document.querySelectorAll('.group-btn').forEach(b=>{
     b.classList.toggle('active', b.dataset.grp === currentGroup);
   });
   document.getElementById('scheduleLine').innerHTML =
-    t.schedule(GROUP_META[currentGroup][currentLang], SCHEDULES[currentGroup][currentLang]);
+    t.schedule(currentGroup, SCHEDULES[currentGroup]);
 
   const allEvents = EVENTS[currentGroup];
   const monthTabs = document.getElementById('monthTabs');
@@ -702,9 +611,8 @@ function render(){
     const card = document.createElement('div');
     card.className = `session-card type-${ev.type}`;
     const dow = dowLabel(ev.d, ev.m, YEAR_FOR(ev.m));
-    const title = t.titles[ev.obs] || ev.obs;
-    const isFestiu = ev.type === 'festiu';
-    const isAllDay = ev.allDay === true;
+    const title = t.titles[ev.title] || ev.title;
+    const note = ev.note ? t.noteIntercanvi : '';
     card.innerHTML = `
       <div class="s-date">
         <div class="d">${ev.d}</div>
@@ -713,10 +621,10 @@ function render(){
       <div class="s-body">
         <span class="s-tag">${t.typeLabel[ev.type]}</span>
         <div class="s-title">${title}</div>
-        ${ev.room ? `<div class="s-sub">${ev.isComputerRoom ? t.computerRoomLabel : t.roomLabel} ${ev.room}</div>` : ''}
-        ${ev.note ? `<div class="s-note">⚠ ${t[ev.note]}</div>` : ''}
+        ${ev.sub ? `<div class="s-sub">${ev.sub === '__COMPUTER_ROOM__' ? t.computerRoom : ev.sub}</div>` : ''}
+        ${note ? `<div class="s-note">⚠ ${note}</div>` : ''}
       </div>
-      ${(isFestiu || isAllDay) ? '' : `<div class="s-time">${ev.start}–${ev.end}</div>`}
+      <div class="s-time">${ev.start}–${ev.end}</div>
     `;
     timeline.appendChild(card);
   });
@@ -753,5 +661,4 @@ document.addEventListener('fullscreenchange', ()=>{
 render();
 </script>
 </body>
-
 </html>

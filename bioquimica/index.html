@@ -206,6 +206,10 @@
   .session-card.type-tutoria{border-left:3px solid var(--amber);}
   .session-card.type-avaluacio{border-left:3px solid var(--rose);}
   .session-card.type-classe{border-left:3px solid var(--teal);}
+  .session-card.type-reavaluacio{
+    border-left:3px solid var(--rose);
+    background:#fdf0ee;
+  }
 
   .s-date{
     flex:none;
@@ -242,6 +246,7 @@
   .type-classe .s-tag{color:var(--teal);}
   .type-tutoria .s-tag{color:var(--amber);}
   .type-avaluacio .s-tag{color:var(--rose);}
+  .type-reavaluacio .s-tag{color:var(--rose);font-weight:600;}
 
   .s-title{
     font-weight:600;
@@ -413,7 +418,7 @@ const I18N = {
     fullscreen: "Pantalla completa",
     exitFullscreen: "Sortir de pantalla completa",
     months: {9:"Setembre",10:"Octubre",11:"Novembre",12:"Desembre"},
-    typeLabel: {classe:"Classe", tutoria:"Tutoria", avaluacio:"Avaluació"},
+    typeLabel: {classe:"Classe", tutoria:"Tutoria", avaluacio:"Avaluació", reavaluacio:"Reavaluació"},
     dow: ["diumenge","dilluns","dimarts","dimecres","dijous","divendres","dissabte"],
     titles: {
       "Introducció al metabolisme I":"Introducció al metabolisme I",
@@ -430,6 +435,8 @@ const I18N = {
       "Metabolisme d'aminoàcids II":"Metabolisme d'aminoàcids II",
       "Integració del metabolisme":"Integració del metabolisme",
       "Avaluador 2":"Avaluador 2",
+      "Reavaluació":"Reavaluació de Bioquímica",
+      "hourTBC":"Hora: es comunicarà més endavant",
     },
     noteIntercanvi: "Sessió en dilluns · Intercanvi amb Nutrició",
   },
@@ -444,7 +451,7 @@ const I18N = {
     fullscreen: "Pantalla completa",
     exitFullscreen: "Salir de pantalla completa",
     months: {9:"Septiembre",10:"Octubre",11:"Noviembre",12:"Diciembre"},
-    typeLabel: {classe:"Clase", tutoria:"Tutoría", avaluacio:"Evaluación"},
+    typeLabel: {classe:"Clase", tutoria:"Tutoría", avaluacio:"Evaluación", reavaluacio:"Reevaluación"},
     dow: ["domingo","lunes","martes","miércoles","jueves","viernes","sábado"],
     titles: {
       "Introducció al metabolisme I":"Introducción al metabolismo I",
@@ -461,6 +468,8 @@ const I18N = {
       "Metabolisme d'aminoàcids II":"Metabolismo de aminoácidos II",
       "Integració del metabolisme":"Integración del metabolismo",
       "Avaluador 2":"Evaluador 2",
+      "Reavaluació":"Reevaluación de Bioquímica",
+      "hourTBC":"Hora: se comunicará más adelante",
     },
     noteIntercanvi: "Sesión en lunes · Intercambio con Nutrición",
   }
@@ -490,6 +499,7 @@ A1: [
  {d:17,m:11,type:'classe',title:"Metabolisme d'aminoàcids II",sub:"Aula 102",start:'11:00',end:'12:30'},
  {d:24,m:11,type:'classe',title:"Integració del metabolisme",sub:"Aula 102",start:'11:00',end:'12:30'},
  {d:1,m:12,type:'avaluacio',title:"Avaluador 2",sub:"__COMPUTER_ROOM__",start:'11:00',end:'12:30'},
+ {d:18,m:12,type:'reavaluacio',title:"Reavaluació",sub:"",start:'',end:''},
 ],
 B1: [
  {d:16,m:9,type:'classe',title:"Introducció al metabolisme I",sub:"Aula 108",start:'11:00',end:'12:30'},
@@ -506,6 +516,7 @@ B1: [
  {d:18,m:11,type:'classe',title:"Metabolisme d'aminoàcids II",sub:"Aula 108",start:'11:00',end:'12:30'},
  {d:25,m:11,type:'classe',title:"Integració del metabolisme",sub:"Aula 108",start:'11:00',end:'12:30'},
  {d:2,m:12,type:'avaluacio',title:"Avaluador 2",sub:"__COMPUTER_ROOM__",start:'11:00',end:'12:30'},
+ {d:18,m:12,type:'reavaluacio',title:"Reavaluació",sub:"",start:'',end:''},
 ],
 C1: [
  {d:16,m:9,type:'classe',title:"Introducció al metabolisme I",sub:"Aula 104",start:'14:30',end:'16:00'},
@@ -522,6 +533,7 @@ C1: [
  {d:18,m:11,type:'classe',title:"Metabolisme d'aminoàcids II",sub:"Aula 104",start:'14:30',end:'16:00'},
  {d:25,m:11,type:'classe',title:"Integració del metabolisme",sub:"Aula 104",start:'14:30',end:'16:00'},
  {d:2,m:12,type:'avaluacio',title:"Avaluador 2",sub:"__COMPUTER_ROOM__",start:'14:30',end:'16:00'},
+ {d:18,m:12,type:'reavaluacio',title:"Reavaluació",sub:"",start:'',end:''},
 ],
 D1: [
  {d:16,m:9,type:'classe',title:"Introducció al metabolisme I",sub:"Aula 108",start:'19:00',end:'20:30'},
@@ -538,6 +550,7 @@ D1: [
  {d:18,m:11,type:'classe',title:"Metabolisme d'aminoàcids II",sub:"Aula 108",start:'19:00',end:'20:30'},
  {d:25,m:11,type:'classe',title:"Integració del metabolisme",sub:"Aula 108",start:'19:00',end:'20:30'},
  {d:2,m:12,type:'avaluacio',title:"Avaluador 2",sub:"__COMPUTER_ROOM__",start:'19:00',end:'20:30'},
+ {d:18,m:12,type:'reavaluacio',title:"Reavaluació",sub:"",start:'',end:''},
 ],
 M1: [
  {d:15,m:9,type:'classe',title:"Introducció al metabolisme I",sub:"Aula 104",start:'08:00',end:'09:30'},
@@ -554,6 +567,7 @@ M1: [
  {d:17,m:11,type:'classe',title:"Metabolisme d'aminoàcids II",sub:"Aula 104",start:'08:00',end:'09:30'},
  {d:24,m:11,type:'classe',title:"Integració del metabolisme",sub:"Aula 104",start:'08:00',end:'09:30'},
  {d:30,m:11,type:'avaluacio',title:"Avaluador 2",sub:"__COMPUTER_ROOM__",start:'09:30',end:'11:00',note:"Sessió en dilluns · Intercanvi amb Nutrició"},
+ {d:18,m:12,type:'reavaluacio',title:"Reavaluació",sub:"",start:'',end:''},
 ],
 };
 
@@ -624,7 +638,7 @@ function render(){
         ${ev.sub ? `<div class="s-sub">${ev.sub === '__COMPUTER_ROOM__' ? t.computerRoom : ev.sub}</div>` : ''}
         ${note ? `<div class="s-note">⚠ ${note}</div>` : ''}
       </div>
-      <div class="s-time">${ev.start}–${ev.end}</div>
+      ${ev.type === 'reavaluacio' ? `<div class="s-time">${t.hourTBC}</div>` : `<div class="s-time">${ev.start}–${ev.end}</div>`}
     `;
     timeline.appendChild(card);
   });
